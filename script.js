@@ -1,7 +1,6 @@
-// Select all sections
+// Reveal sections on scroll
 const sections = document.querySelectorAll(".section");
 
-// Function to reveal elements on scroll
 function revealSections() {
     const triggerBottom = window.innerHeight * 0.85;
 
@@ -14,33 +13,43 @@ function revealSections() {
     });
 }
 
-// Run on scroll
 window.addEventListener("scroll", revealSections);
-
-// Run once on load
 revealSections();
 
-const navLinks = document.querySelectorAll("nav a");
-const allSections = document.querySelectorAll("section");
 
-window.addEventListener("scroll", () => {
+// Active navbar link on scroll
+const navLinks = document.querySelectorAll("nav a");
+const allSections = document.querySelectorAll("section[id]");
+
+function setActiveNavLink() {
     let current = "";
 
     allSections.forEach(section => {
         const sectionTop = section.offsetTop;
-        if (scrollY >= sectionTop - 100) {
+        const sectionHeight = section.offsetHeight;
+
+        if (
+            window.scrollY >= sectionTop - 120 &&
+            window.scrollY < sectionTop + sectionHeight - 120
+        ) {
             current = section.getAttribute("id");
         }
     });
 
     navLinks.forEach(link => {
         link.classList.remove("active");
-        if (link.getAttribute("href") === "#" + current) {
+
+        if (link.getAttribute("href") === `#${current}`) {
             link.classList.add("active");
         }
     });
-});
+}
 
+window.addEventListener("scroll", setActiveNavLink);
+setActiveNavLink();
+
+
+// Ripple effect on buttons
 const buttons = document.querySelectorAll(".btn, .card-btn");
 
 buttons.forEach(button => {
@@ -48,13 +57,35 @@ buttons.forEach(button => {
         const circle = document.createElement("span");
         circle.classList.add("ripple");
 
-        const rect = button.getBoundingClientRect();
-        circle.style.left = e.clientX - rect.left + "px";
-        circle.style.top = e.clientY - rect.top + "px";
+        const rect = this.getBoundingClientRect();
+        circle.style.left = `${e.clientX - rect.left}px`;
+        circle.style.top = `${e.clientY - rect.top}px`;
 
         this.appendChild(circle);
 
-        setTimeout(() => circle.remove(), 500);
+        setTimeout(() => {
+            circle.remove();
+        }, 500);
     });
 });
 
+
+// Mobile menu toggle
+const menuToggle = document.querySelector(".menu-toggle");
+const navMenu = document.querySelector(".nav-links");
+
+if (menuToggle && navMenu) {
+    menuToggle.addEventListener("click", () => {
+        navMenu.classList.toggle("show-menu");
+
+        const isOpen = navMenu.classList.contains("show-menu");
+        menuToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    });
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+        link.addEventListener("click", () => {
+            navMenu.classList.remove("show-menu");
+            menuToggle.setAttribute("aria-expanded", "false");
+        });
+    });
+}
