@@ -52,10 +52,8 @@ nav a {
     transition: color 0.3s ease;
 }
 
-nav a:hover,
-nav a.active {
+nav a:hover {
     color: #4f46e5;
-    border-bottom: 2px solid #4f46e5;
 }
 
 /* Hero */
@@ -101,19 +99,12 @@ nav a.active {
 .hero h1 {
     font-size: 56px;
     margin-bottom: 15px;
-    line-height: 1.2;
 }
 
 .subtitle {
     font-size: 20px;
     margin-bottom: 25px;
     opacity: 0.95;
-}
-
-.btn,
-.card-btn {
-    position: relative;
-    overflow: hidden;
 }
 
 .btn {
@@ -257,51 +248,7 @@ nav a.active {
     font-size: 14px;
 }
 
-/* Scroll animation */
-.section {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.6s ease;
-}
-
-.section.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Ripple */
-.ripple {
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    background: rgba(255, 255, 255, 0.5);
-    border-radius: 50%;
-    transform: scale(0);
-    animation: rippleEffect 0.5s linear;
-    pointer-events: none;
-}
-
-@keyframes rippleEffect {
-    to {
-        transform: scale(3);
-        opacity: 0;
-    }
-}
-
-/* Hero animation */
-.hero-text {
-    opacity: 0;
-    transform: translateY(30px);
-    animation: fadeUp 1s ease forwards;
-}
-
-@keyframes fadeUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
+/* Responsive Design */
 /* Responsive Design */
 @media (max-width: 768px) {
     nav {
@@ -313,7 +260,6 @@ nav a.active {
     .logo {
         font-size: 22px;
         text-align: center;
-        line-height: 1.3;
     }
 
     nav ul {
@@ -349,6 +295,7 @@ nav a.active {
 
     .hero h1 {
         font-size: 34px;
+        line-height: 1.2;
     }
 
     .subtitle {
@@ -407,5 +354,55 @@ nav a.active {
     .footer {
         font-size: 12px;
         padding: 16px;
+    }
+}
+/* Scroll Animation */
+.section {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.6s ease;
+}
+
+.section.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* Hero Animation */
+.hero-text {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUp 1s ease forwards;
+}
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+nav a.active {
+    color: #4f46e5;
+    border-bottom: 2px solid #4f46e5;
+}
+.btn, .card-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.ripple {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    transform: scale(0);
+    animation: rippleEffect 0.5s linear;
+    pointer-events: none;
+}
+
+@keyframes rippleEffect {
+    to {
+        transform: scale(3);
+        opacity: 0;
     }
 }
