@@ -89,3 +89,20 @@ if (menuToggle && navMenu) {
         });
     });
 }
+// Hide navbar on scroll down, show on scroll up
+let lastScrollY = window.scrollY;
+const navbar = document.querySelector("nav");
+
+window.addEventListener("scroll", () => {
+    if (window.innerWidth > 768) {
+        if (window.scrollY > lastScrollY && window.scrollY > 80) {
+            navbar.classList.add("hide-nav");
+        } else {
+            navbar.classList.remove("hide-nav");
+        }
+    } else {
+        navbar.classList.remove("hide-nav");
+    }
+
+    lastScrollY = window.scrollY;
+});
